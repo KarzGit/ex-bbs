@@ -27,8 +27,8 @@ public class CommentRepository {
 	private NamedParameterJdbcTemplate template;
 
 	public List<Comment> findByArticleId(int articleId) {
-		String sql = "select id, name, content, article_id from comments where id=:id";
-		SqlParameterSource param = new MapSqlParameterSource().addValue("id", articleId);
+		String sql = "select id, name, content, article_id from comments where article_id=:articleId";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("articleId", articleId);
 		List<Comment> commentList = template.query(sql, param, COMMENT_ROW_MAPPER);
 		return commentList;
 
