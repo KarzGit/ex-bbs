@@ -26,7 +26,7 @@ public class ArticleRepository {
 	private NamedParameterJdbcTemplate template;
 
 	public List<Article> findAll() {
-		String sql = "select * from articles";
+		String sql = "select * from articles order by id desc";
 		List<Article> articleList = template.query(sql, ARTICLE_ROW_MAPPER);
 		return articleList;
 	}

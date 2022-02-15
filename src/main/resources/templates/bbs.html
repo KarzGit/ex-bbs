@@ -5,6 +5,11 @@
 <title>掲示板システム</title>
 </head>
 <body>
-
+<div th:each="article:${articleList}">
+投稿者名：<span th:text="${article.name}"></span><br>
+投稿内容：<br>
+<pre th:text="${article.content}"></pre>
+<hr>
+</div>
 </body>
 </html>
