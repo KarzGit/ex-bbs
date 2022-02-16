@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Article;
+import com.example.domain.Comment;
 import com.example.form.ArticleForm;
 import com.example.form.CommentForm;
 import com.example.service.ArticleService;
@@ -57,7 +58,20 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/insertComment")
-	public String insertComment(CommentForm form, Model model) {
+	public String insertComment(CommentForm form, Integer articleId, Model model) {
+		Comment comment = new Comment();
+		comment.setName(form.getName());
+		comment.setContent(form.getContent());
+		comment.setArticleId(articleId);
+		commentService.insert(comment);
+		return index(model);
+	}
+
+	@RequestMapping("deleteArticle")
+	public String deleteArticle(Integer id, Model model) {
+		commentService.deleteByArticleId(id);
+		articleService.deleteById(id);
+
 		return index(model);
 	}
 
