@@ -43,12 +43,12 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/insertArticle")
-	public String insertArticle(ArticleForm form, Model model) {
+	public String insertArticle(ArticleForm form) {
 		Article article = new Article();
 		article.setName(form.getName());
 		article.setContent(form.getContent());
 		articleService.insert(article);
-		return index(model);
+		return "forward:/bbs";
 
 	}
 
@@ -58,21 +58,21 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/insertComment")
-	public String insertComment(CommentForm form, Integer articleId, Model model) {
+	public String insertComment(CommentForm form, Integer articleId) {
 		Comment comment = new Comment();
 		comment.setName(form.getName());
 		comment.setContent(form.getContent());
 		comment.setArticleId(articleId);
 		commentService.insert(comment);
-		return index(model);
+		return "forward:/bbs";
 	}
 
-	@RequestMapping("deleteArticle")
-	public String deleteArticle(Integer id, Model model) {
-		commentService.deleteByArticleId(id);
+	@RequestMapping("/deleteArticle")
+	public String deleteArticle(Integer id) {
+		commentService.deleteByArticleId(id);	
 		articleService.deleteById(id);
 
-		return index(model);
+		return "forward:/bbs";
 	}
 
 }
